@@ -438,7 +438,7 @@ end;
 
 procedure TForm1.Timer4Timer(Sender: TObject);
 begin
-  Timer4.Interval := 61000;
+  Timer4.Interval := 31000;
   if not IsClose then
   begin
     IsClose := true;
