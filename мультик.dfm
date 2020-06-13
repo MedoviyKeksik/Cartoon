@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnPaint = FormPaint
   OnShow = FormShow

@@ -24,9 +24,13 @@ type
     procedure Timer3Timer(Sender: TObject);
     procedure Timer4Timer(Sender: TObject);
     procedure FormPaint(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     Man: TJumpingMan;
     Man1: TJumpingMan;
+    Man2, Man3: TJumpingMan;
+    CloseTimer: TTimer;
+    procedure OnClosetTimer(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
@@ -46,6 +50,12 @@ implementation
 uses
   MainFormUnit;
 
+procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  CanClose := True;
+  Form4.Close;
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 
 begin
@@ -60,10 +70,16 @@ begin
   movestart := true;
   Man := TJumpingMan.Create(Self);
   Man1 := TJumpingMan.Create(Self);
+  Man2 := TJumpingMan.Create(Self);
+  Man3 := TJumpingMan.Create(Self);
   Man.SetPosition(X + 400, Y + 100);
   Man1.SetPosition(X - 400, Y + 100);
-  Man.Scale := 2.0;
-  Man1.Scale := 2.0;
+  Man2.SetPosition(X + 300, Y + 500);
+  Man3.SetPosition(X - 250, Y + 550);
+  Man.Scale := 1.8;
+  Man1.Scale := 1.8;
+  Man2.Scale := 1.8;
+  Man3.Scale := 1.8;
 end;
 
 procedure TForm1.FormPaint(Sender: TObject);
@@ -361,6 +377,8 @@ begin
   notki; // ноты
   Man.Draw;
   Man1.Draw;
+  Man2.Draw;
+  Man3.Draw;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
@@ -368,6 +386,11 @@ begin
 
 //  Form4.Show;
   MediaPlayer1.Play; // включается песня
+end;
+
+procedure TForm1.OnClosetTimer(Sender: TObject);
+begin
+  Form4.Close;
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
@@ -438,30 +461,22 @@ end;
 
 procedure TForm1.Timer4Timer(Sender: TObject);
 begin
-  Timer4.Interval := 31000;
+  Timer4.Interval := 26000;
   if not IsClose then
   begin
     IsClose := true;
-      Man.Greeting;
-      Man.Greeting;
-      Man1.Greeting;
-      Man1.Greeting;
-      Man.Greeting;
-      Man.Greeting;
-      Man1.Greeting;
-      Man1.Greeting;
-      Man.Greeting;
-      Man.Greeting;
-      Man1.Greeting;
-      Man1.Greeting;
-      Man.Greeting;
-      Man.Greeting;
-      Man1.Greeting;
-      Man1.Greeting;
   end
   else
   begin
-    Form4.Close;
+    Man.Greeting;
+    Man1.Greeting;
+    Man2.Greeting;
+    Man3.Greeting;
+    CloseTimer := TTimer.Create(Self);
+    CloseTimer.Enabled := True;
+    CloseTimer.Interval := 5000;
+    CloseTimer.OnTimer := OnClosetTimer;
+//    Form4.Close;
   end; // закрытие формы по оканчанию мелодии
 end;
 

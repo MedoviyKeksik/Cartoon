@@ -6,7 +6,7 @@ uses
   DrawManModule, SkiSlope,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Gauges,
-  Vcl.ExtCtrls, Vcl.MPlayer;
+  Vcl.ExtCtrls, Vcl.MPlayer, AthleticMan;
 
 type
   TForm4 = class(TForm)
@@ -20,6 +20,7 @@ type
     State : integer;
     Frame : Integer;
 
+    Man: TJumpingMan;
     CloseTime: TTimer;
 
     procedure DrawManUp(var ManConfig : TManConfig);
@@ -136,6 +137,8 @@ end;
 
 
 procedure TForm4.FormCreate(Sender: TObject);
+var
+  I: Integer;
 begin
     CloseTime := TTimer.Create(Self);
     CloseTime.Enabled := True;
@@ -184,6 +187,11 @@ begin
         LeftSkiAngle := 180;
         RightSkiAngle := 180;
     end;
+    Man := TJumpingMan.Create(Self);
+    Man.SetPosition(1090, 540);
+    Man.Scale := 0.4;
+    for I := 0 to 10 do
+        Man.Greeting;
 end;
 
 procedure TForm4.FormPaint(Sender: TObject);
@@ -214,6 +222,7 @@ begin
     DrawMan(ManConfig2, Canvas);
 //
     DrawFlag(Canvas, 'Flag.bmp', 850, 680);
+    Man.Draw;
 end;
 
 procedure TForm4.OnCloseTimer(Sender: TObject);
