@@ -64,22 +64,6 @@ begin
   Man1.SetPosition(X - 400, Y + 100);
   Man.Scale := 2.0;
   Man1.Scale := 2.0;
-  Man.Greeting;
-  Man.Greeting;
-  Man1.Greeting;
-  Man1.Greeting;
-  Man.Greeting;
-  Man.Greeting;
-  Man1.Greeting;
-  Man1.Greeting;
-  Man.Greeting;
-  Man.Greeting;
-  Man1.Greeting;
-  Man1.Greeting;
-  Man.Greeting;
-  Man.Greeting;
-  Man1.Greeting;
-  Man1.Greeting;
 end;
 
 procedure TForm1.FormPaint(Sender: TObject);
@@ -454,9 +438,27 @@ end;
 
 procedure TForm1.Timer4Timer(Sender: TObject);
 begin
-  Timer4.Interval := 31000;
+  Timer4.Interval := 61000;
   if not IsClose then
-    IsClose := true
+  begin
+    IsClose := true;
+      Man.Greeting;
+      Man.Greeting;
+      Man1.Greeting;
+      Man1.Greeting;
+      Man.Greeting;
+      Man.Greeting;
+      Man1.Greeting;
+      Man1.Greeting;
+      Man.Greeting;
+      Man.Greeting;
+      Man1.Greeting;
+      Man1.Greeting;
+      Man.Greeting;
+      Man.Greeting;
+      Man1.Greeting;
+      Man1.Greeting;
+  end
   else
   begin
     Form4.Close;
